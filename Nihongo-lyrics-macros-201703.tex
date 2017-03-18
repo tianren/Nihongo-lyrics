@@ -1,0 +1,44 @@
+% \documentclass[12pt]{article}
+% \documentclass[14pt]{extreport}
+\usepackage[CJKspace=true]{xeCJK}
+\usepackage{color}
+
+%\setCJKmainfont[ItalicFont={楷体_GB2312}, BoldFont={黑体}]{宋体}
+%\setCJKsansfont{黑体}
+%\setCJKmonofont{仿宋_GB2312}
+\setCJKmainfont{Noto Sans CJK JP}
+
+\topmargin=-0.95in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.75in       %
+\headsep=0.25in
+
+\pagestyle{empty}
+
+\makeatletter
+\def\dynscriptsize{\check@mathfonts\fontsize{\sf@size}{\z@}\selectfont}
+\makeatother
+\def\textunderset#1#2{\leavevmode
+  \vtop{\offinterlineskip\halign{%
+    \hfil##\hfil\cr\strut#2\cr\noalign{\kern-.3ex}
+    \hidewidth\dynscriptsize\strut#1\hidewidth\cr}}}
+
+\newcommand{\zhuyin}[2]{\textunderset{#2}{#1}}
+\newcommand{\kanji}[2]{\textunderset{#1}{\textcolor{blue}{#2}}}
+\newcommand{\trans}[1]{\strut\hfill{\small #1}}
+
+\newcommand{\lyrics}[2]{\begingroup
+\def\z{\zhuyin}
+\list{}{\leftmargin0em}
+\setlength\itemsep{1em}
+  #1
+\endlist
+\newpage
+\def\z{\kanji}
+\list{}{\leftmargin0em}
+\setlength\itemsep{1em}
+  #1
+\endlist
+\endgroup}
