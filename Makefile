@@ -19,4 +19,4 @@ debug:
 	@echo $(lyrics)
 	# @echo $(lyricspdf)
 
-.PHONY: $(compile_types) debug
+.PHONY: $(compile_types) debug target
