@@ -1,16 +1,22 @@
-texfiles = $(wildcard *.tex)
-lyrics = $(shell ls *.tex | grep -v ' ' | grep -iv  'macros')
+compile_types = kanji-lyrics dual-lyrics
+
+ifneq ($(lyricstypemake),)
+lyrics = $(notdir $(wildcard ../*.tex))
 lyricspdf = $(lyrics:%.tex=%.pdf)
+target: $(lyricspdf)
+$(lyricspdf): %.pdf: ../%.tex
+	# $(if $(shell head $< | grep -i "TeX program" | grep -io "LuaLaTeX"), lualatex --file-line-error $<, xelatex -shell-escape $<)
+	lualatex --file-line-error $<
+	# if [ -n "$(DISPLAY)" ]; then evince $@ & fi
+else
+target: $(compile_types)
 
-target: $(lyricspdf) $(lyricspdf-lua)
-
-$(lyricspdf): %.pdf: %.tex
-	$(if $(shell head $< | grep -i "TeX program" | grep -io "LuaLaTeX"), lualatex --file-line-error $<, xelatex -shell-escape $<)
-	if [ -n "$(DISPLAY)" ]; then evince $@ & fi
-
-# $(lyricspdf-lua): %.pdf: %.tex
-# 	lualatex --file-line-error $<
-# 	evince $@ &
+$(compile_types):
+	export lyricstypemake=1 && make -C $@ --makefile=../Makefile
+endif
 
 debug:
-	echo $(sort $(lyrics))
+	@echo $(lyrics)
+	# @echo $(lyricspdf)
+
+.PHONY: $(compile_types) debug
