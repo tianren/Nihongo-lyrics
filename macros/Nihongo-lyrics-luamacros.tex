@@ -1,0 +1,59 @@
+% !TeX encoding = UTF-8
+% !TeX program = LuaLaTeX
+
+%\documentclass[12pt]{article}
+
+%\usepackage{luatexja-preset}
+%\usepackage{fontspec}
+\usepackage[no-math]{luatexja-fontspec}
+\usepackage{luatexja-ruby}
+\usepackage{color}
+
+\topmargin=-0.95in      %
+\evensidemargin=0in     %
+\oddsidemargin=0in      %
+\textwidth=6.5in        %
+\textheight=9.75in       %
+\headsep=0.25in
+
+\setmainfont{Noto Sans CJK JP}
+\setmainjfont{Noto Sans CJK JP}
+
+\makeatletter
+\def\dynscriptsize{\check@mathfonts\fontsize{\sf@size}{\z@}\selectfont}
+\makeatother
+\def\textunderset#1#2{\leavevmode
+  \vtop{\offinterlineskip\halign{%
+    \hfil##\hfil\cr\strut#2\cr\noalign{\kern-.3ex}
+    \hidewidth\dynscriptsize\strut#1\hidewidth\cr}}}
+\newcommand{\righttext}[1]{\ifx&#1&\else
+  \hspace{1em} \unskip
+  \nobreak \hfil \penalty1000 \hfilneg \indent
+  \strut\hfill \mbox{\def\z{\zhuyin}\small #1}
+  \fi}
+
+\newcommand{\zhuyin}[2]{\ruby{#1}{#2}}
+\newcommand{\kanji}[2]{\textunderset{#1}{\textcolor{blue}{#2}}}
+\def\jisho{\righttext}
+\def\trans{\righttext}
+
+\newcommand{\lyrics}[1]{\begingroup
+\def\z{\zhuyin}
+\list{}{\leftmargin0em}
+\setlength\itemsep{1em}
+  #1
+\endlist
+\endgroup}
+
+\makeatletter
+\newcommand{\itemmark}[2]{%
+\item[#1.]
+\def\@currentlabel{#1}\label{par:#1}
+  \expandafter\def\csname firstline@#1\endcsname{#2}%
+  #2
+}
+\newcommand{\itemrepeat}[1]{
+  \item[\ref{par:#1}.]
+  \csname firstline@#1\endcsname
+}
+\makeatother

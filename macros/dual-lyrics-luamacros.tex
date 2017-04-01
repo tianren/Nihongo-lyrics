@@ -1,0 +1,22 @@
+% !TeX encoding = UTF-8
+% !TeX program = LuaLaTeX
+
+\input{../macros/Nihongo-lyrics-luamacros.tex}
+
+\renewcommand{\jisho}[1]{}
+
+\renewcommand{\lyrics}[1]{\begingroup
+\def\z{\zhuyin}
+\list{}{\leftmargin0em}
+\setlength\itemsep{1em}
+  #1
+\endlist
+\endgroup
+\clearpage
+\begingroup
+\def\z{\kanji}
+\list{}{\leftmargin0em}
+\setlength\itemsep{1em}
+  #1
+\endlist
+\endgroup}
