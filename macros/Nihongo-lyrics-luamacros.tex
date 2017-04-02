@@ -34,6 +34,7 @@
 
 \newcommand{\zhuyin}[2]{\ruby{#1}{#2}}
 \newcommand{\kanji}[2]{\textunderset{#1}{\textcolor{blue}{#2}}}
+\newcommand{\hide}[1]{}
 \def\jisho{\righttext}
 \def\trans{\righttext}
 
@@ -46,14 +47,31 @@
 \endgroup}
 
 \makeatletter
-\newcommand{\itemmark}[2]{%
+\newcommand{\itemmark}[3]{%
 \item[#1.]
 \def\@currentlabel{#1}\label{par:#1}
   \expandafter\def\csname firstline@#1\endcsname{#2}%
+  \expandafter\def\csname remaininglines@#1\endcsname{#3}%
   #2
+  #3
 }
-\newcommand{\itemrepeat}[1]{
-  \item[\ref{par:#1}.]
-  \csname firstline@#1\endcsname
+\newcommand{\itemfirstline}[1]{\csname firstline@#1\endcsname}
+\newcommand{\itemcontext}[1]{\csname firstline@#1\endcsname
+  \csname remaininglines@#1\endcsname}
+
+\newcommand{\itemref}[2][.]{\ref{par:#2}#1}
+\newcommand{\itemsref}[2][.]{%
+  \def\itemref@nextspace{}%
+  \@for \el:=#2\do{\itemref@nextspace\itemref[#1]{\el}\def\itemref@nextspace{ }}%
 }
+\newcommand{\itemseen}[1]{\item[\itemsref{#1}]}
+
+\newcommand{\itemrepeat}[1]{\itemseen{#1}\itemcontext{#1}}
+\newcommand{\itemsrepeat}[1]{
+  \@for \el:=#1\do{\itemrepeat{\el}}
+}
+\newcommand{\itemrepeatfirstline}[1]{\itemseen{#1}%
+  \def\operation{\itemfirstline}%
+  \@for \el:=#1\do{\operation{\el}\def\operation{\hide}}%
+  }
 \makeatother
