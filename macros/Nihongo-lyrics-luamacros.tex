@@ -29,14 +29,27 @@
 \newcommand{\righttext}[1]{\ifx&#1&\else
   \hspace{1em} \unskip
   \nobreak \hfil \penalty1000 \hfilneg \indent
-  \strut\hfill \mbox{\def\z{\zhuyin}\small #1}
+  \strut\hfill \mbox{\def\z{\zhuyin}#1}
   \fi}
+\newcommand{\rightpara}[1]{\begingroup\ifx&#1&\else%
+  \hspace{3em} \unskip%
+  \nobreak \hfil \penalty1000 \hfilneg \indent%
+  \strut\hfill%
+  \setlength{\parfillskip}{0pt}%
+  \raggedleft%
+  \mbox{} #1\par
+  \fi\endgroup%
+}
 
 \newcommand{\zhuyin}[2]{\ruby{#1}{#2}}
 \newcommand{\kanji}[2]{\textunderset{#1}{\textcolor{blue}{#2}}}
 \newcommand{\hide}[1]{}
-\def\jisho{\righttext}
-\def\trans{\righttext}
+\makeatletter
+\newcommand{\jisho}[1]{\ifx&#1&\else\rightpara{\small%
+  \@for \el:=#1\do{\mbox{\el.} }%
+  }\fi}
+\makeatother
+\newcommand{\trans}[1]{\righttext{\small #1}}
 
 \newcommand{\lyrics}[1]{\begingroup
 \def\z{\zhuyin}
@@ -46,6 +59,9 @@
 \endlist
 \endgroup}
 
+%
+% Section reusage
+%
 \makeatletter
 \newcommand{\itemmark}[3]{%
 \item[#1.]
