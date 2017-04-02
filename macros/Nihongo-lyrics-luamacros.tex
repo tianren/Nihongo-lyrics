@@ -31,15 +31,21 @@
   \nobreak \hfil \penalty1000 \hfilneg \indent
   \strut\hfill \mbox{\def\z{\zhuyin}#1}
   \fi}
+\makeatletter
 \newcommand{\rightpara}[1]{\begingroup\ifx&#1&\else%
-  \hspace{1em} \unskip%
+  \hspace{1em}\unskip%
   \nobreak \hfil \penalty1000 \hfilneg \indent%
   \strut\hfill%
   \setlength{\parfillskip}{0pt}%
-  \raggedleft%
-  \mbox{} #1\par
+  % \raggedleft%
+  % \let\\\@centercr
+  % \rightskip\z@skip%
+  \leftskip\@flushglue
+  % \parindent\z@\parfillskip\z@skip
+  \mbox{}\linebreak[0] #1\par
   \fi\endgroup%
 }
+\makeatother
 
 \newcommand{\zhuyin}[2]{\ruby{#1}{#2}}
 \newcommand{\kanji}[2]{\textunderset{#1}{\textcolor{blue}{#2}}}
@@ -47,7 +53,7 @@
 \makeatletter
 \newcommand{\jisho}[1]{\ifx&#1&\else\rightpara{\small%
   \@for \el:=#1\do{\mbox{\el.} }%
-  }\fi}
+  \par}\fi}
 \makeatother
 \newcommand{\trans}[1]{\righttext{\small #1}}
 
