@@ -1,18 +1,22 @@
 % !TeX encoding = UTF-8
 % !TeX program = LuaLaTeX
 
-%\documentclass[12pt]{article}
-\documentclass[14pt]{extreport}
+\documentclass[14pt]{ltjsarticle}
 \input{Nihongo-lyrics-luamacros.tex}
 \begin{document}
+
+%
+% \mbox is added between \item and 「 as a workaround
+% until the bug in luatexja-ruby is resolved.
+%
 
 \lyrics{
 \item
   \textbf{花咲く☆最強レジェンドDays \hfill %
-    「生徒会役員共\*」のOP}
+    「生徒会役員共*」のOP}
 
 \item
-  「\z{桜}{さくら}の\z{花言葉}{はなことば}を\z{知}{し}ってるか?」
+  \mbox「\z{桜}{さくら}の\z{花言葉}{はなことば}を\z{知}{し}ってるか?」
   \jisho{}
 
   「\z{聞}{き}いたことありません。」
@@ -57,7 +61,7 @@
   \jisho{}
 
 \item
-  "よい\z{子}{こ}はマネして"
+  ``よい\z{子}{こ}はマネして''
   \jisho{}
 
 \item
@@ -86,7 +90,7 @@
   \jisho{}
 
 \item
-  「ついでにこれも\z{言}{い}っておこう。」
+  \mbox「ついでにこれも\z{言}{い}っておこう。」
   \jisho{}
 
   「\z{花言葉}{はなことば}ですか?」
@@ -128,7 +132,7 @@
   \jisho{}
 
 \item
-  "\z{焦}{あせ}りは\z{禁物}{きんもつ}"
+  ``\z{焦}{あせ}りは\z{禁物}{きんもつ}''
   \jisho{}
 
 \item
@@ -232,7 +236,7 @@
   \jisho{}
 
 \item
-  「\z{例}{れい}のアレは\z{覚}{おぼ}えたか?」
+  \mbox「\z{例}{れい}のアレは\z{覚}{おぼ}えたか?」
   \jisho{}
 
   「\z{完璧}{かんぺき}です。」
