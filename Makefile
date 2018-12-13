@@ -19,4 +19,7 @@ debug:
 	@echo $(lyrics)
 	# @echo $(lyricspdf)
 
-.PHONY: $(compile_types) debug target
+clean:
+	find $(compile_types) \( -name *.log -o -name *.aux -o -name *.ltjruby \) -delete
+
+.PHONY: $(compile_types) debug target clean
