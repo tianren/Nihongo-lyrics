@@ -35,14 +35,15 @@
 \newcommand{\rightpara}[1]{\begingroup\ifx&#1&\else%
   \hspace{1em}\unskip%
   \nobreak \hfil \penalty1000 \hfilneg \indent%
-  \strut\hfill%
+  % \strut%
+  \hfill%
   \setlength{\parfillskip}{0pt}%
   % \raggedleft%
   % \let\\\@centercr
   % \rightskip\z@skip%
   \leftskip\@flushglue
   % \parindent\z@\parfillskip\z@skip
-  \mbox{}\linebreak[0] #1\par
+  \mbox{}\linebreak[0] #1%\par
   \fi\endgroup%
 }
 \makeatother
@@ -53,7 +54,8 @@
 \makeatletter
 \newcommand{\jisho}[1]{\ifx&#1&\else\rightpara{\small%
   \@for \el:=#1\do{\mbox{\el.} }%
-  \par}\fi}
+  % \par
+  }\fi}
 \makeatother
 \newcommand{\trans}[1]{\righttext{\small #1}}
 

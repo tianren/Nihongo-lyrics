@@ -1,4 +1,4 @@
-compile_types = kanji-lyrics dual-lyrics
+compile_types = kanji-lyrics #dual-lyrics
 
 ifneq ($(lyricstypemake),)
 lyrics = $(notdir $(wildcard ../source/*.tex))
