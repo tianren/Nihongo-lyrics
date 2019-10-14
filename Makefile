@@ -8,6 +8,7 @@ $(lyricspdf): %.pdf: ../source/%.tex
 	# $(if $(shell head $< | grep -i "TeX program" | grep -io "LuaLaTeX"), lualatex --file-line-error $<, xelatex -shell-escape $<)
 	lualatex --file-line-error $<
 	# if [ -n "$(DISPLAY)" ]; then evince $@ & fi
+	if grep -q itemmark $<; then lualatex --file-line-error $<; fi
 else
 target: $(compile_types)
 
