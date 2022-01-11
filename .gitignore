@@ -2,4 +2,8 @@
 *.aux
 *.ltjruby
 *.dvi
+*-build/*
+dual-lyrics/*.pdf
+__pycache__
+*.backup
 .dropbox.attr
